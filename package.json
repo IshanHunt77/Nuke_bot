@@ -1,0 +1,26 @@
+{
+  "name": "nuke_bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "@types/node-telegram-bot-api": "^0.64.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@project-serum/anchor": "^0.26.0",
+    "@solana/web3.js": "^1.98.2",
+    "axios": "^1.10.0",
+    "bs58": "^6.0.0",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
