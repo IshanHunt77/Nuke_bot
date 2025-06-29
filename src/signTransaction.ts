@@ -1,6 +1,16 @@
-export const signTransaction =async ({connection,transaction}:any)=>{
-    try{
+import { SimulateTransactionConfig, VersionedTransaction } from "@solana/web3.js";
+import axios from "axios";
 
+export const signTransaction =async ({connection,quoteResponse,wallet}:any)=>{
+    try{
+      const swapRes = await axios.post("https://lite-api.jup.ag/swap/v1/swap", {
+      quoteResponse,
+      userPublicKey: wallet.publicKey.toString(),//get public key from db
+    });
+
+    const swapTransaction = swapRes.data.swapTransaction;
+    const transactionBuf = Buffer.from(swapTransaction, "base64");
+    const transaction = VersionedTransaction.deserialize(transactionBuf);
         transaction.sign([wallet.payer]);//get payer from db
 
     const latestBlockhash = await connection.getLatestBlockhash();
@@ -21,6 +31,7 @@ export const signTransaction =async ({connection,transaction}:any)=>{
 
     console.log(`Transaction successful! ✅`);
     console.log(`View on Solscan: https://solscan.io/tx/${signature}`);
+    return signature;
     }catch(e:any){
         console.log("Error in signing Transaction:",e);
     }
