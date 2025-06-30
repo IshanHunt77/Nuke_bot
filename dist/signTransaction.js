@@ -24,34 +24,23 @@ const signTransaction = (_a) => __awaiter(void 0, [_a], void 0, function* ({ con
         const swapTransaction = swapRes.data.swapTransaction;
         const transactionBuf = Buffer.from(swapTransaction, "base64");
         const transaction = web3_js_1.VersionedTransaction.deserialize(transactionBuf);
-        let simulateTxConfig = {
-            sigVerify: false,
-            replaceRecentBlockhash: true,
-            commitment: "finalized",
-            accounts: undefined,
-            innerInstructions: undefined,
-            minContextSlot: undefined,
-        };
-        let simulateResult = yield connection.simulateTransaction(transaction, simulateTxConfig);
-        console.log(simulateResult);
-        return simulateResult;
-        //     transaction.sign([wallet.payer]);//get payer from db
-        // const latestBlockhash = await connection.getLatestBlockhash();
-        // // 4. Serialize and send the transaction
-        // const rawTransaction = transaction.serialize();
-        // const signature = await connection.sendRawTransaction(rawTransaction, {
-        //   maxRetries: 2,
-        //   skipPreflight: true,
-        // });
-        // // 5. Confirm the transaction
-        // await connection.confirmTransaction({
-        //   blockhash: latestBlockhash.blockhash,
-        //   lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
-        //   signature,
-        // });
-        // console.log(`Transaction successful! ✅`);
-        // console.log(`View on Solscan: https://solscan.io/tx/${signature}`);
-        //return signature;
+        transaction.sign([wallet.payer]); //get payer from db
+        const latestBlockhash = yield connection.getLatestBlockhash();
+        // 4. Serialize and send the transaction
+        const rawTransaction = transaction.serialize();
+        const signature = yield connection.sendRawTransaction(rawTransaction, {
+            maxRetries: 2,
+            skipPreflight: true,
+        });
+        // 5. Confirm the transaction
+        yield connection.confirmTransaction({
+            blockhash: latestBlockhash.blockhash,
+            lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
+            signature,
+        });
+        console.log(`Transaction successful! ✅`);
+        console.log(`View on Solscan: https://solscan.io/tx/${signature}`);
+        return signature;
     }
     catch (e) {
         console.log("Error in signing Transaction:", e);
