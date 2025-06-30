@@ -18,8 +18,11 @@ const getQuote_1 = require("./getQuote");
 const signTransaction_1 = require("./signTransaction");
 const getBalance_1 = require("./getBalance");
 const prisma_1 = __importDefault(require("./prisma"));
-const BOT_TOKEN = '8164931415:AAGMAVxsnR_WjHN8Hx8TeOn6ki7jueP6XHk';
-const bot = new node_telegram_bot_api_1.default(BOT_TOKEN, { polling: true });
+const token = process.env.TELEGRAM_BOT_API;
+if (!token) {
+    throw new Error("❌ TELEGRM_BOT_API is not defined in environment variables.");
+}
+const bot = new node_telegram_bot_api_1.default(token, { polling: true });
 const connection = new web3_js_1.Connection("https://api.mainnet-beta.solana.com");
 const userStates = new Map();
 console.log("🚀 Bot is up and running!");

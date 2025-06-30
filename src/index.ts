@@ -4,9 +4,13 @@ import { getQuote } from './getQuote';
 import { signTransaction } from './signTransaction';
 import { getBalance } from './getBalance';
 import prisma from './prisma';
+const token = process.env.TELEGRAM_BOT_API;
+if (!token) {
+  throw new Error("❌ TELEGRM_BOT_API is not defined in environment variables.");
+}
 
-const BOT_TOKEN = '8164931415:AAGMAVxsnR_WjHN8Hx8TeOn6ki7jueP6XHk';
-const bot = new TelegramBot(BOT_TOKEN, { polling: true });
+const bot = new TelegramBot(token, { polling: true });
+
 const connection = new Connection("https://api.mainnet-beta.solana.com");
 
 interface UserSession {
