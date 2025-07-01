@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { Connection, Keypair } from '@solana/web3.js';
 import TelegramBot from 'node-telegram-bot-api';
 import { getQuote } from './getQuote';
@@ -6,7 +9,7 @@ import { getBalance } from './getBalance';
 import prisma from './prisma';
 const token = process.env.TELEGRAM_BOT_API;
 if (!token) {
-  throw new Error("❌ TELEGRM_BOT_API is not defined in environment variables.");
+  throw new Error("❌ TELEGRAM_BOT_API is not defined in environment variables.");
 }
 
 const bot = new TelegramBot(token, { polling: true });

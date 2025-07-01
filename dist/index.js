@@ -12,6 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const web3_js_1 = require("@solana/web3.js");
 const node_telegram_bot_api_1 = __importDefault(require("node-telegram-bot-api"));
 const getQuote_1 = require("./getQuote");
@@ -20,7 +22,7 @@ const getBalance_1 = require("./getBalance");
 const prisma_1 = __importDefault(require("./prisma"));
 const token = process.env.TELEGRAM_BOT_API;
 if (!token) {
-    throw new Error("❌ TELEGRM_BOT_API is not defined in environment variables.");
+    throw new Error("❌ TELEGRAM_BOT_API is not defined in environment variables.");
 }
 const bot = new node_telegram_bot_api_1.default(token, { polling: true });
 const connection = new web3_js_1.Connection("https://api.mainnet-beta.solana.com");

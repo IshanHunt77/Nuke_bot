@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
-  "node": ">=18.0.0"
-},
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +28,7 @@
     "@solana/web3.js": "^1.98.2",
     "axios": "^1.10.0",
     "bs58": "^6.0.0",
+    "dotenv": "^17.0.0",
     "node-fetch": "^2.7.0",
     "node-telegram-bot-api": "^0.66.0",
     "stream-chain": "^3.4.0",

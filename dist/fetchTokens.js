@@ -32,7 +32,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchAndStoreTokens = exports.tokens = void 0;
 const stream_1 = require("stream");
 // @ts-ignore if needed for TS
-const nodeStream = stream_1.Readable.fromWeb(res.body);
 const stream_json_1 = require("stream-json");
 const StreamArray_1 = require("stream-json/streamers/StreamArray");
 const promises_1 = require("node:stream/promises");
@@ -42,6 +41,7 @@ const fetchAndStoreTokens = () => __awaiter(void 0, void 0, void 0, function* ()
     if (!res.ok || !res.body) {
         throw new Error(`Failed to fetch: ${res.status}`);
     }
+    const nodeStream = stream_1.Readable.fromWeb(res.body);
     console.log(res.body);
     yield (0, promises_1.pipeline)(nodeStream, (0, stream_json_1.parser)(), (0, StreamArray_1.streamArray)(), function (source) {
         return __asyncGenerator(this, arguments, function* () {
