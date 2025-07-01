@@ -28,23 +28,22 @@ var __asyncGenerator = (this && this.__asyncGenerator) || function (thisArg, _ar
     function reject(value) { resume("throw", value); }
     function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchAndStoreTokens = exports.tokens = void 0;
-const node_fetch_1 = __importDefault(require("node-fetch"));
+const stream_1 = require("stream");
+// @ts-ignore if needed for TS
+const nodeStream = stream_1.Readable.fromWeb(res.body);
 const stream_json_1 = require("stream-json");
 const StreamArray_1 = require("stream-json/streamers/StreamArray");
 const promises_1 = require("node:stream/promises");
 exports.tokens = new Map();
 const fetchAndStoreTokens = () => __awaiter(void 0, void 0, void 0, function* () {
-    const res = yield (0, node_fetch_1.default)("https://lite-api.jup.ag/tokens/v1/all");
+    const res = yield fetch("https://lite-api.jup.ag/tokens/v1/all");
     if (!res.ok || !res.body) {
         throw new Error(`Failed to fetch: ${res.status}`);
     }
     console.log(res.body);
-    yield (0, promises_1.pipeline)(res.body, (0, stream_json_1.parser)(), (0, StreamArray_1.streamArray)(), function (source) {
+    yield (0, promises_1.pipeline)(nodeStream, (0, stream_json_1.parser)(), (0, StreamArray_1.streamArray)(), function (source) {
         return __asyncGenerator(this, arguments, function* () {
             var _a, e_1, _b, _c;
             try {

@@ -1,4 +1,6 @@
-import fetch from 'node-fetch';
+import { Readable } from 'stream';
+// @ts-ignore if needed for TS
+const nodeStream = Readable.fromWeb(res.body as any);
 import { parser } from 'stream-json';
 import { streamArray } from 'stream-json/streamers/StreamArray';
 import { chain } from 'stream-chain';
@@ -19,7 +21,7 @@ export const fetchAndStoreTokens = async () => {
   }
 console.log(res.body)
   await pipeline(
-    res.body,
+    nodeStream,
     parser(),
     streamArray(),
     async function* (source: AsyncIterable<any>)
