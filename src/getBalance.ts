@@ -1,5 +1,4 @@
 import { Connection, PublicKey } from "@solana/web3.js";
-import axios from "axios"
 
 export const getBalance = async(address:String)=>{
     try{

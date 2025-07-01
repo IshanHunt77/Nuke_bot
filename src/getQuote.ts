@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import https from "https";
 import { fetchAndStoreTokens, tokens } from "./fetchTokens";
 

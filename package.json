@@ -14,7 +14,6 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^24.0.3",
-    "@types/node-fetch": "^2.6.12",
     "@types/node-telegram-bot-api": "^0.64.9",
     "@types/stream-json": "^1.7.8",
     "prisma": "^6.10.1",
