@@ -6,7 +6,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "prisma generate && tsc",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -31,8 +32,5 @@
     "node-telegram-bot-api": "^0.66.0",
     "stream-chain": "^3.4.0",
     "stream-json": "^1.9.1"
-  },
-   "overrides": {
-    "node-fetch": "0.0.0" 
   }
 }
