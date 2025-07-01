@@ -22,7 +22,8 @@ console.log(res.body)
     res.body,
     parser(),
     streamArray(),
-    async function* (source) {
+    async function* (source: AsyncIterable<any>)
+ {
       for await (const { value } of source) {
   const { symbol, name, address, decimals } = value;
         tokens.set(symbol,{symbol,name,address,decimals});
