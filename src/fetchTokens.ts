@@ -5,6 +5,7 @@ import { streamArray } from 'stream-json/streamers/StreamArray';
 import { chain } from 'stream-chain';
 import prisma from './prisma';
 import { pipeline } from 'node:stream/promises';
+import { fetch } from 'undici';
 
 interface Token {
   symbol : string;

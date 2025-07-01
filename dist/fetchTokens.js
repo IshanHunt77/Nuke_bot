@@ -35,9 +35,10 @@ const stream_1 = require("stream");
 const stream_json_1 = require("stream-json");
 const StreamArray_1 = require("stream-json/streamers/StreamArray");
 const promises_1 = require("node:stream/promises");
+const undici_1 = require("undici");
 exports.tokens = new Map();
 const fetchAndStoreTokens = () => __awaiter(void 0, void 0, void 0, function* () {
-    const res = yield fetch("https://lite-api.jup.ag/tokens/v1/all");
+    const res = yield (0, undici_1.fetch)("https://lite-api.jup.ag/tokens/v1/all");
     if (!res.ok || !res.body) {
         throw new Error(`Failed to fetch: ${res.status}`);
     }

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getQuote = void 0;
 const fetchTokens_1 = require("./fetchTokens");
+const undici_1 = require("undici");
 const getQuote = (_a) => __awaiter(void 0, [_a], void 0, function* ({ inputToken, outputToken, amount, slippage }) {
     console.log("🔍 Quote requested:", { inputToken, outputToken, amount, slippage });
     yield (0, fetchTokens_1.fetchAndStoreTokens)();
@@ -23,7 +24,7 @@ const getQuote = (_a) => __awaiter(void 0, [_a], void 0, function* ({ inputToken
     const lamports = Math.floor(amount * Math.pow(10, inputMint.decimals));
     const quoteUrl = `https://lite-api.jup.ag/swap/v1/quote?inputMint=${inputMint.address}&outputMint=${outputMint.address}&amount=${lamports}&slippageBps=${slippage * 100}&restrictIntermediateTokens=true`;
     console.log("🌐 Fetching quote from:", quoteUrl);
-    const res = yield fetch(quoteUrl);
+    const res = yield (0, undici_1.fetch)(quoteUrl);
     let quoteResponse = yield res.json();
     return { quoteResponse, outputDecimalValue: outputMint.decimals };
 });
